@@ -458,5 +458,5 @@ Running over HTTP is still reasonably secure provided you use really strong mast
 ## Get in touch
 
 To ask an question, [raising an issue](https://github.com/dani-garcia/bitwarden_rs/issues/new) is fine, also please report any bugs spotted here.
-
+ 
 If you prefer to chat, we're usually hanging around at [#bitwarden_rs:matrix.org](https://matrix.to/#/#bitwarden_rs:matrix.org) room on Matrix. Feel free to join us!
