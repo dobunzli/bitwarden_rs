@@ -177,13 +177,15 @@ docker run -d --name bitwarden \
 Note that you need to mount ssl files and you need to forward appropriate port.
 
 Softwares used for getting certs are often using symlinks. If that is the case, both locations need to be accessible to the docker container.
-Example: certbot will create a folder that contains the needed cert.pem and privacy.pem files in /etc/letsencrypt/live/mydomain/
 
-These files are symlinked to ../../archive/mydomain/mykey.pem
+Example: [certbot](https://certbot.eff.org/) will create a folder that contains the needed `cert.pem` and `privacy.pem` files in `/etc/letsencrypt/live/mydomain/`
+
+These files are symlinked to `../../archive/mydomain/mykey.pem`
 
 So to use from bitwarden container:
 
-```sudo docker run -d --name bitwarden \
+```sh
+docker run -d --name bitwarden \
   -e ROCKET_TLS='{certs="/ssl/live/mydomain/cert.pem",key="/ssl/live/mydomain/privkey.pem"}' \
   -v /etc/letsencrypt/:/ssl/ \
   -v /bw-data/:/data/ \
@@ -439,7 +441,9 @@ We use upstream Vault interface directly without any (significant) changes, this
 
 ### Inviting users into organization
 
-If you have [invitations disabled](#disable-invitations), the users must already be registered on your server to invite them. The invited users won't get the invitation email, instead they will appear in the interface as if they already accepted the invitation. (if the user has already registered) Organization admin then just needs to confirm them to be proper Organization members and to give them access to the shared secrets.
+The invited users won't get the invitation email, instead all already registered users will appear in the interface as if they already accepted the invitation. Organization admin then just needs to confirm them to be proper Organization members and to give them access to the shared secrets.
+
+Invited users, that aren't registered yet will show up in the Organization admin interface as "Invited". At the same time an invitation record is created that allows the users to register even if [user registration is disabled](#disable-registration-of-new-users). (unless you [disable this functionality](#disable-invitations)) They will automatically become "Accepted" once they register. From there Organization admin can confirm them to give them access to Organization.
 
 ### Running on unencrypted connection
 

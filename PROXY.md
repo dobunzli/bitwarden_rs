@@ -47,7 +47,7 @@ server {
   }
 
   location /notifications/hub {
-    proxy_pass http://<SERVER>:3012/api/websocket;
+    proxy_pass http://<SERVER>:3012;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
   }
@@ -77,4 +77,19 @@ server {
     ProxyPreserveHost On
     ProxyRequests Off
 </VirtualHost>
+```
+
+## Traefik (docker-compose example)
+```traefik
+    labels:
+      - 'traefik.frontend.rule=Host:vault.example.local'
+      - 'traefik.docker.network=traefik'
+      - 'traefik.port=80'
+      - 'traefik.enable=true'
+      - 'traefik.web.frontend.rule=Host:vault.example.local'
+      - 'traefik.web.port=80'
+      - 'traefik.hub.frontend.rule=Path:/notifications/hub'
+      - 'traefik.hub.port=3012'
+      - 'traefik.negotiate.frontend.rule=Path:/notifications/hub/negotiate'
+      - 'traefik.negotiate.port=80'
 ```
