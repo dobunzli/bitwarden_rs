@@ -76,6 +76,10 @@ Basically full implementation of Bitwarden API is provided including:
 
 ## Docker image usage
 
+- to use bitwarden_rs on a "ARM7 plateform" (e.g. raspberry pi) use ```mprasil/bitwarden:raspberry``` instead of  ```mprasil/bitwarden:latest``` in the different commands below
+
+- to use bitwarden_rs on a "musl plateform" (e.g. gentoo musl) use  ```mprasil/bitwarden:alpine``` instead of  ```mprasil/bitwarden:latest``` in the different commands below
+
 ### Starting a container
 
 The persistent data is stored under /data inside the container, so the only requirement for persistent deployment using Docker is to mount persistent volume at the path:
